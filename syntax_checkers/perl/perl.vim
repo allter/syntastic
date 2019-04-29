@@ -39,11 +39,11 @@ endif
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! SyntaxCheckers_perl_perl_IsAvailable() dict " {{{1
-    if !exists('g:syntastic_perl_perl_exec') && exists('g:syntastic_perl_interpreter')
-        let g:syntastic_perl_perl_exec = g:syntastic_perl_interpreter
-    endif
+if !exists('g:syntastic_perl_perl_exec') && exists('g:syntastic_perl_interpreter')
+    let g:syntastic_perl_perl_exec = g:syntastic_perl_interpreter
+endif
 
+function! SyntaxCheckers_perl_perl_IsAvailable() dict " {{{1
     " don't call executable() here, to allow things like
     " let g:syntastic_perl_interpreter='/usr/bin/env perl'
     silent! call syntastic#util#system(self.getExecEscaped() . ' -e ' . syntastic#util#shescape('exit(0)'))
